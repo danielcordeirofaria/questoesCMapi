@@ -26,9 +26,6 @@ public class Questao {
 	
 	@Column(name = "enunciado", nullable = false)
 	private String enunciado;
-	
-	@Column(name = "endereco_imagem")
-	private String enderecoImagem;
 
 	@Column(name = "resposta_a", nullable = false)
 	private String respostaA;
@@ -48,7 +45,7 @@ public class Questao {
 	@Column(name = "gabarito", length = 1, nullable = false)
 	@Enumerated(EnumType.STRING)
 	private GabaritoEnum gabarito;
-
+	
 	@Column(name = "materia", length = 20, nullable = false)
 	@Enumerated(EnumType.STRING)
 //	opções: MATEMATICA ou PORTUGUES
@@ -56,19 +53,14 @@ public class Questao {
 	
 	@Column(name = "endereco_video")
 	private String enderecoVideo;
-	
-	@Column(name = "resolvido")
-	private double resolvido;
-	
-	public Questao(int idQuestao, int anoProva, int numeroQuestao, String enunciado, String enderecoImagem,
+		
+	public Questao(int anoProva, int numeroQuestao, String enunciado,
 			String respostaA, String respostaB, String respostaC, String respostaD, String respostaE,
-			GabaritoEnum gabarito, MateriaEnum materia, String enderecoVideo, double resolvido) {
+			GabaritoEnum gabarito, MateriaEnum materia, String enderecoVideo) {
 		super();
-		this.idQuestao = idQuestao;
 		this.anoProva = anoProva;
 		this.numeroQuestao = numeroQuestao;
 		this.enunciado = enunciado;
-		this.enderecoImagem = enderecoImagem;
 		this.respostaA = respostaA;
 		this.respostaB = respostaB;
 		this.respostaC = respostaC;
@@ -77,7 +69,6 @@ public class Questao {
 		this.gabarito = gabarito;
 		this.materia = materia;
 		this.enderecoVideo = enderecoVideo;
-		this.resolvido = resolvido;
 	}
 
 	
@@ -86,15 +77,13 @@ public class Questao {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	public int getIdQuestao() {
 		return idQuestao;
 	}
 
-	public void setIdQuestao(int idQuestao) {
-		this.idQuestao = idQuestao;
-	}
+//	public void setIdQuestao(int idQuestao) {
+//		this.idQuestao = idQuestao;
+//	}
 
 	public int getAnoProva() {
 		return anoProva;
@@ -118,14 +107,6 @@ public class Questao {
 
 	public void setEnunciado(String enunciado) {
 		this.enunciado = enunciado;
-	}
-
-	public String getEnderecoImagem() {
-		return enderecoImagem;
-	}
-
-	public void setEnderecoImagem(String enderecoImagem) {
-		this.enderecoImagem = enderecoImagem;
 	}
 
 	public String getRespostaA() {
@@ -191,21 +172,5 @@ public class Questao {
 	public void setEnderecoVideo(String enderecoVideo) {
 		this.enderecoVideo = enderecoVideo;
 	}
-
-
-	public double getResolvido() {
-		return resolvido;
-	}
-
-
-	public void setResolvido(double resolvido) {
-		this.resolvido = resolvido;
-	}
-	
-	
-	
-	
-	
-	
 
 }

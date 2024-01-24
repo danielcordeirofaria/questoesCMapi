@@ -14,20 +14,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tbl_alunos")
-public class Aluno {
+@Table(name = "tbl_usuarios")
+public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id_aluno")
+	@Column(name = "id_usuario")
 	private int id;
 	
-	@Column(name = "nome_aluno", length = 45, nullable = false)
+	@Column(name = "nome_usuario", length = 45, nullable = false)
 	private String nome;
 	
 	@Column(name = "login", length = 40, nullable = false, unique = true)
 	private String login;
-
+	
+	@Column(name = "senha", length = 40, nullable = false)
+	private String senha; 
 	
 	@Column(name = "data_nascimento", nullable = false)
 	private Date dataNascimento;
@@ -41,29 +43,36 @@ public class Aluno {
 	@Column(name = "whatsapp", length = 13, nullable = false)
 	private String whatsapp;
 	
-	@Column(name = "data_compra", nullable = false)
+	@Column(name = "data_compra")
 	private Date dataCompra;
 	
-	@Column(name = "escola_da_prova", length = 40, nullable = false)
+	@Column(name = "escola_da_prova", length = 10)
 	@Enumerated(EnumType.STRING)
 //	opções de escolas ('CMC', 'CMRJ', 'CMSP', 'CMBel', 'CMBH', 'CMB', 'CMCG', 'CMF', 'CMJF', 'CMM', 'CMPA', 'CMR', 'CMS', 'CMSM')
 	private ColegioEnum escolaDaProva;
+	
+	@Column(name = "roles", length = 10)
+	@Enumerated(EnumType.STRING)
+    private UserRole roles;
 
-	public Aluno(int id, String nome, String login, Date dataNascimento, String cidade, String email, String whatsapp,
-			Date dataCompra, ColegioEnum escolaDaProva) {
+
+	public Usuario(int id, String nome, String login, String senha, Date dataNascimento, String cidade, String email, String whatsapp,
+			Date dataCompra, ColegioEnum escolaDaProva, UserRole roles) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.login = login;
+		this.senha = senha;
 		this.dataNascimento = dataNascimento;
 		this.cidade = cidade;
 		this.email = email;
 		this.whatsapp = whatsapp;
 		this.dataCompra = dataCompra;
 		this.escolaDaProva = escolaDaProva;
+		this.roles = roles;
 	}
 
-	public Aluno() {
+	public Usuario() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -90,6 +99,16 @@ public class Aluno {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+	
+	
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public Date getDataNascimento() {
@@ -139,6 +158,16 @@ public class Aluno {
 	public void setEscolaDaProva(ColegioEnum escolaDaProva) {
 		this.escolaDaProva = escolaDaProva;
 	}
+
+
+	public UserRole getRoles() {
+		return roles;
+	}
+
+	public void setRoles(UserRole roles) {
+		this.roles = roles;
+	}
+	
 	
 	
 	

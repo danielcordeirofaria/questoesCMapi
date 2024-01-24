@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.questoesCM.DAO.alunoDAO;
-import com.questoesCM.model.Aluno;
+import com.questoesCM.DAO.UsuarioDAO;
+import com.questoesCM.model.Usuario;
 
 @Service
-public class AlunoServiceImpl implements IAlunoService {
+public class UsuarioServiceImpl implements IUsuarioService {
 
 	@Autowired
-    private alunoDAO dao;
+    private UsuarioDAO dao;
 
     @Override
-    public String salvarAluno(Aluno aluno) {
+    public String salvarAluno(Usuario usuario) {
         try {
-            dao.save(aluno);
+            dao.save(usuario);
             return "Aluno salvo com sucesso!";
         } catch (Exception e) {
             // Tratar exceções, se necessário
@@ -26,19 +26,19 @@ public class AlunoServiceImpl implements IAlunoService {
     }
 
     @Override
-    public ArrayList<Aluno> buscarAlunosPorCidade(String cidade) {
+    public ArrayList<Usuario> buscarAlunosPorCidade(String cidade) {
         return dao.findByCidade(cidade);
     }
 
 
     @Override
-    public ArrayList<Aluno> recuperarTodos() {
-        return (ArrayList<Aluno>) dao.findAll();
+    public ArrayList<Usuario> recuperarTodos() {
+        return (ArrayList<Usuario>) dao.findAll();
     }
 
 	@Override
-	public void save(Aluno aluno) {
-		dao.save(aluno);
+	public void save(Usuario usuario) {
+		dao.save(usuario);
 		
 	}
 

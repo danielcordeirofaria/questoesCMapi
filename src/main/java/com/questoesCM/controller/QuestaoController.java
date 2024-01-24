@@ -19,14 +19,24 @@ public class QuestaoController {
 	@Autowired
 	private IQuestaoService service;
 	
-    @PostMapping("/questao")
-    public ResponseEntity<String> adicionarQuestao(@RequestBody Questao q) {
+    @PostMapping("/questoes")
+    public ResponseEntity<String> salvarQuestao(@RequestBody Questao q) {
         try {
-            String questaoAdicionada = service.adicionarQuestao(q);
+            System.out.println("Id_questao antes de salvar: " + q.getIdQuestao());
+
+            service.save(q);
+            
+            System.out.println("Id_questao após salvar: " + q.getIdQuestao());
+
             return ResponseEntity.ok("Questao adicionada com sucesso!");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Erro ao adicionar a questao: " + e.getMessage());
         }
+    }
+    
+    @GetMapping("/questoes")
+    public ArrayList<Questao> recuperarTodasQuestoes(){
+    	return service.recuperarTodasQuestoes();
     }
     
     @GetMapping("/questao/{anoProva}")
