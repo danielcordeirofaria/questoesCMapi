@@ -1,7 +1,5 @@
 package com.questoesCM.model;
 
-//endereco_imagempackage com.questoesCM.model;
-
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -20,7 +18,7 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
-	private int id;
+	private int idUsuario;
 	
 	@Column(name = "nome_usuario", length = 45, nullable = false)
 	private String nome;
@@ -56,10 +54,10 @@ public class Usuario {
     private UserRole roles;
 
 
-	public Usuario(int id, String nome, String login, String senha, Date dataNascimento, String cidade, String email, String whatsapp,
+	public Usuario(int idUsuario, String nome, String login, String senha, Date dataNascimento, String cidade, String email, String whatsapp,
 			Date dataCompra, ColegioEnum escolaDaProva, UserRole roles) {
 		super();
-		this.id = id;
+		this.idUsuario = idUsuario;
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
@@ -77,12 +75,12 @@ public class Usuario {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getId() {
-		return id;
+	public int getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getNome() {

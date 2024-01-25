@@ -11,7 +11,7 @@ public interface IUsuarioService {
 
 	ArrayList<Usuario> recuperarTodos();
 
-	String salvarAluno(Usuario usuario);
+	String cadastrarUsuario(Usuario usuario);
 
 	public void save(Usuario usuario);
 	

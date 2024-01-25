@@ -19,9 +19,9 @@ public class UsuarioController {
 	private IUsuarioService service;
 
     @PostMapping("/usuarios")
-    public ResponseEntity<String> cadastrarAluno(@RequestBody Usuario usuario) {
+    public ResponseEntity<String> cadastrarUsuario(@RequestBody Usuario usuario) {
         try {
-            service.save(usuario);
+            service.cadastrarUsuario(usuario);
             return ResponseEntity.ok("Aluno adicionado com sucesso!");
         } catch (Exception e) {
             // Aqui você pode lidar com a exceção de maneira apropriada, como logá-la ou retornar uma mensagem de erro específica.

@@ -9,13 +9,11 @@ import com.questoesCM.model.Usuario;
 
 public interface IQuestaoService {
 
-	ArrayList<Questao> simuladoPorAno(int anoProva);
+//	ArrayList<Questao> simuladoPorAno(int anoProva);
 
-	ArrayList<Questao> recuperarTodasQuestoes();
+	ArrayList<Questao> recuperarQuestoes();
 
-	ResponseEntity<String> salvarQuestao(Questao q);
+	String salvarQuestao(Questao q);
+
 	
-	void save(Questao q);
-
-
 }

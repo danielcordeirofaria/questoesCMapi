@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.questoesCM.model.Questao;
+import com.questoesCM.model.Usuario;
 import com.questoesCM.service.IQuestaoService;
 
 @RestController
@@ -35,16 +36,17 @@ public class QuestaoController {
     }
     
     @GetMapping("/questoes")
-    public ArrayList<Questao> recuperarTodasQuestoes(){
-    	return service.recuperarTodasQuestoes();
+    public ResponseEntity<ArrayList<Questao>> recuperarQuestoes(){
+    	ArrayList<Questao> questoes = (ArrayList<Questao>)service.recuperarQuestoes();
+    	return ResponseEntity.ok(questoes);
     }
     
-    @GetMapping("/questao/{anoProva}")
-    public ResponseEntity<ArrayList<Questao>> simuladoPorAno(@PathVariable int anoProva){
-    	ArrayList<Questao> simulado = (ArrayList<Questao>)service.simuladoPorAno(anoProva);
-    	return ResponseEntity.ok(simulado);
-    }
-    
+//    @GetMapping("/questao/{anoProva}")
+//    public ResponseEntity<ArrayList<Questao>> simuladoPorAno(@PathVariable int anoProva){
+//    	ArrayList<Questao> simulado = (ArrayList<Questao>)service.simuladoPorAno(anoProva);
+//    	return ResponseEntity.ok(simulado);
+//    }
+//    
    
 
 }

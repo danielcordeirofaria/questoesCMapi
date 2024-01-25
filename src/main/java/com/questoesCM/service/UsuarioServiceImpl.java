@@ -15,7 +15,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     private UsuarioDAO dao;
 
     @Override
-    public String salvarAluno(Usuario usuario) {
+    public String cadastrarUsuario(Usuario usuario) {
         try {
             dao.save(usuario);
             return "Aluno salvo com sucesso!";

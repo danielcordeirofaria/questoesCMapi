@@ -17,83 +17,86 @@ public class QuestaoServiceImpl implements IQuestaoService {
     @Autowired
     private QuestaoDAO dao;
 
-    public ResponseEntity<String> salvarQuestao(Questao q) {
+    
+    @Override
+    public String salvarQuestao(Questao q) {
         try {
-        	if(q.getIdQuestao() == 0) {
-                return ResponseEntity.status(400).body("Id está sendo 0Como isso aconteceu?");
-        	}
-        	
+            // Validações
+            StringBuilder errorMessage = new StringBuilder();
+
+            if (q.getIdQuestao() == 0) {
+                errorMessage.append("Id está sendo 0. Como isso aconteceu?\n");
+            }
+
             if (q.getAnoProva() <= 0) {
-                return ResponseEntity.status(400).body("Ano da prova inválido.");
+                errorMessage.append("Ano da prova inválido.\n");
             }
 
             if (q.getNumeroQuestao() <= 0) {
-                return ResponseEntity.status(400).body("Número da questão inválido.");
+                errorMessage.append("Número da questão inválido.\n");
             }
 
             if (q.getEnunciado() == null || q.getEnunciado().isEmpty()) {
-                return ResponseEntity.status(400).body("Enunciado não pode ser vazio.");
+                errorMessage.append("Enunciado não pode ser vazio.\n");
             }
             if (q.getRespostaA() == null || q.getRespostaA().isEmpty()) {
-                return ResponseEntity.status(400).body("A Resposta A não pode ser vazia.");
+                errorMessage.append("A Resposta A não pode ser vazia.\n");
             }
 
             if (q.getRespostaB() == null || q.getRespostaB().isEmpty()) {
-                return ResponseEntity.status(400).body("A Resposta B não pode ser vazia.");
+                errorMessage.append("A Resposta B não pode ser vazia.\n");
             }
 
             if (q.getRespostaC() == null || q.getRespostaC().isEmpty()) {
-                return ResponseEntity.status(400).body("A Resposta C não pode ser vazia.");
+                errorMessage.append("A Resposta C não pode ser vazia.\n");
             }
 
             if (q.getRespostaD() == null || q.getRespostaD().isEmpty()) {
-                return ResponseEntity.status(400).body("A Resposta D não pode ser vazia.");
+                errorMessage.append("A Resposta D não pode ser vazia.\n");
             }
 
             if (q.getRespostaE() == null || q.getRespostaE().isEmpty()) {
-                return ResponseEntity.status(400).body("A Resposta E não pode ser vazia.");
+                errorMessage.append("A Resposta E não pode ser vazia.\n");
             }
-            if(q.getGabarito() == null) {
-                return ResponseEntity.status(400).body("O gabarito não pode ser vazia.");
+            if (q.getGabarito() == null) {
+                errorMessage.append("O gabarito não pode ser vazio.\n");
             }
-            if(q.getMateria() == null) {
-            	return ResponseEntity.status(400).body("Você precisa selecionar uma matéria");
+            if (q.getMateria() == null) {
+                errorMessage.append("Você precisa selecionar uma matéria.\n");
             }
-            if(q.getEnderecoVideo() == null || q.getEnderecoVideo().isEmpty()) {
-            	return ResponseEntity.status(400).body("Você precisa enviar o link do video");
+            if (q.getEnderecoVideo() == null || q.getEnderecoVideo().isEmpty()) {
+                errorMessage.append("Você precisa enviar o link do video.\n");
+            }
 
+            // Se houver mensagens de erro, retorna-as
+            if (errorMessage.length() > 0) {
+                return errorMessage.toString();
             }
 
-        	dao.save(q);
-            return  ResponseEntity.ok("Questão adicionada com sucesso!");
+            // Salvando a questão se todas as validações passarem
+            dao.save(q);
+            return "Questão adicionada com sucesso!";
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Erro ao adicionar a questão: " + e.getMessage());
+            return "Erro ao adicionar a questão: " + e.getMessage();
         }
     }
-	
 
 
 //	Montar um simulado por ano
-	@Override
-	public ArrayList<Questao> simuladoPorAno(int anoProva) {
-
-		return dao.findByAnoProva(anoProva);
-	}
-
-
-
-	@Override
-	public ArrayList<Questao> recuperarTodasQuestoes() {
-
-		return dao.findAll();
-	}
+//	@Override
+//	public ArrayList<Questao> simuladoPorAno(int anoProva) {
+//
+//		return dao.findByAnoProva(anoProva);
+//	}
 
 
 
 	@Override
-	public void save(Questao q) {
-		dao.save(q);		
+	public ArrayList<Questao> recuperarQuestoes() {
+
+		return (ArrayList<Questao>) dao.findAll();
 	}
+
 
 
 
