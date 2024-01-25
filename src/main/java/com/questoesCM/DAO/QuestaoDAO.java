@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.questoesCM.model.Questao;
 
-public interface QuestaoDAO extends CrudRepository<Questao, Long> {
+public interface QuestaoDAO extends CrudRepository<Questao, Integer> {
 	
     ArrayList<Questao> findByAnoProva(int anoProva);
 

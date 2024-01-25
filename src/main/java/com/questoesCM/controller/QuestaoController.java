@@ -24,7 +24,7 @@ public class QuestaoController {
         try {
             System.out.println("Id_questao antes de salvar: " + q.getIdQuestao());
 
-            service.save(q);
+            service.salvarQuestao(q);
             
             System.out.println("Id_questao após salvar: " + q.getIdQuestao());
 

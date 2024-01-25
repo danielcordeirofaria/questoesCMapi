@@ -10,5 +10,5 @@ CREATE TABLE tbl_questoes (
     resposta_e TEXT NOT NULL,
     gabarito VARCHAR(1) NOT NULL CHECK (gabarito IN ('A', 'B', 'C', 'D', 'E')),
     materia VARCHAR(20) NOT NULL CHECK (materia IN ('MATEMATICA', 'PORTUGUES')),
-    endereco_video TEXT
+    endereco_video TEXT NOT NULL 
 );
