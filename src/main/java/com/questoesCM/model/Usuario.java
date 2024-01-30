@@ -1,6 +1,12 @@
 package com.questoesCM.model;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +19,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tbl_usuarios")
-public class Usuario {
+public class Usuario implements UserDetails{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,21 +29,18 @@ public class Usuario {
 	@Column(name = "nome_usuario", length = 45, nullable = false)
 	private String nome;
 	
-	@Column(name = "login", length = 40, nullable = false, unique = true)
-	private String login;
+	@Column(name = "email", length = 40, nullable = false)
+	private String email;
 	
-	@Column(name = "senha", length = 40, nullable = false)
-	private String senha; 
+	@Column(name = "password", length = 40, nullable = false)
+	private String password; 
 	
 	@Column(name = "data_nascimento", nullable = false)
 	private Date dataNascimento;
 	
 	@Column(name = "cidade", nullable = false)
 	private String cidade;
-	
-	@Column(name = "email", length = 40, nullable = false)
-	private String email;
-	
+		
 	@Column(name = "whatsapp", length = 13, nullable = false)
 	private String whatsapp;
 	
@@ -51,23 +54,28 @@ public class Usuario {
 	
 	@Column(name = "roles", length = 10)
 	@Enumerated(EnumType.STRING)
-    private UserRole roles;
+    private UserRole role;
 
 
-	public Usuario(int idUsuario, String nome, String login, String senha, Date dataNascimento, String cidade, String email, String whatsapp,
-			Date dataCompra, ColegioEnum escolaDaProva, UserRole roles) {
+	public Usuario(int idUsuario, String nome, String email, String password, Date dataNascimento, String cidade, String whatsapp,
+			Date dataCompra, ColegioEnum escolaDaProva, UserRole role) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nome = nome;
-		this.login = login;
-		this.senha = senha;
+		this.email = email;
+		this.password = password;
 		this.dataNascimento = dataNascimento;
 		this.cidade = cidade;
-		this.email = email;
 		this.whatsapp = whatsapp;
 		this.dataCompra = dataCompra;
 		this.escolaDaProva = escolaDaProva;
-		this.roles = roles;
+		this.role = role;
+	}
+	
+	public Usuario(String email, String password, UserRole role) {
+		this.email = email;
+		this.password = password;
+		
 	}
 
 	public Usuario() {
@@ -91,22 +99,8 @@ public class Usuario {
 		this.nome = nome;
 	}
 	
-		public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-	
-	
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String senha) {
+		this.password = senha;
 	}
 
 	public Date getDataNascimento() {
@@ -158,12 +152,55 @@ public class Usuario {
 	}
 
 
-	public UserRole getRoles() {
-		return roles;
+	public UserRole getRole() {
+		return role;
 	}
 
-	public void setRoles(UserRole roles) {
-		this.roles = roles;
+	public void setRoles(UserRole role) {
+		this.role = role;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+		else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 	

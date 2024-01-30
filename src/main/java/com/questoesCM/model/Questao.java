@@ -18,10 +18,10 @@ public class Questao {
 	@Column(name = "id_questao")
 	private int idQuestao;
 	
-	@Column(name = "ano_prova", length = 4, nullable = false)
+	@Column(name = "ano_prova", nullable = false)
 	private int anoProva;
 
-	@Column(name = "numero_questao", length = 2, nullable = false)
+	@Column(name = "numero_questao", nullable = false)
 	private int numeroQuestao;
 	
 	@Column(name = "enunciado", nullable = false)
@@ -42,11 +42,11 @@ public class Questao {
 	@Column(name = "resposta_e", nullable = false)
 	private String respostaE;
 	
-	@Column(name = "gabarito", length = 1, nullable = false)
+	@Column(name = "gabarito", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private GabaritoEnum gabarito;
 	
-	@Column(name = "materia", length = 20, nullable = false)
+	@Column(name = "materia", nullable = false)
 	@Enumerated(EnumType.STRING)
 //	opções: MATEMATICA ou PORTUGUES
 	private MateriaEnum materia;
