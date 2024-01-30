@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.questoesCM.DAO.QuestaoDAO;
 import com.questoesCM.model.Questao;
-import com.questoesCM.model.Usuario;
+import com.questoesCM.model.User;
 
 @Service
 public class QuestaoServiceImpl implements IQuestaoService {

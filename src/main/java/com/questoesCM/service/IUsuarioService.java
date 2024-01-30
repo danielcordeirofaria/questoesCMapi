@@ -2,18 +2,18 @@ package com.questoesCM.service;
 
 import java.util.ArrayList;
 
-import com.questoesCM.model.Usuario;
+import com.questoesCM.model.User;
 
 public interface IUsuarioService {
 
 
-	ArrayList<Usuario> buscarAlunosPorCidade(String cidade);
+	ArrayList<User> buscarAlunosPorCidade(String cidade);
 
-	ArrayList<Usuario> recuperarTodos();
+	ArrayList<User> recuperarTodos();
 
-	String cadastrarUsuario(Usuario usuario);
+	String cadastrarUsuario(User user);
 
-	public void save(Usuario usuario);
+	public void save(User user);
 	
 	
 }

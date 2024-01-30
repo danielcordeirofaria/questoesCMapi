@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.questoesCM.DAO.UsuarioDAO;
-import com.questoesCM.model.Usuario;
-import com.questoesCM.registerDTO.RegisterDTO;
+import com.questoesCM.DAO.UserDAO;
+import com.questoesCM.DTO.LoginResponseDTO;
+import com.questoesCM.DTO.RegisterDTO;
+import com.questoesCM.model.User;
 
 import DTO.AuthenticationDTO;
+import security.TokenService;
 
 @RestController
 @RequestMapping("auth")
@@ -25,23 +27,27 @@ public class AuthenticationController {
 	private AuthenticationManager authenticationManager;
 	
 	@Autowired 
-	private UsuarioDAO DAO;
+	private UserDAO DAO;
 	
-	@PostMapping("/login")
-	public ResponseEntity login(@RequestBody @Validated  AuthenticationDTO data) {
-		
-        var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
+	@Autowired
+    private TokenService tokenService;
+	
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody @Validated AuthenticationDTO data){
+        var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
-		return ResponseEntity.ok().build();
-		
-	}
+
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
+    }
 	
 	@PostMapping("/register")
 	public ResponseEntity register(@RequestBody @Validated RegisterDTO data) {
-		if(this.DAO.findByEmail(data.email()) !=null) return ResponseEntity.badRequest().build();
+		if(this.DAO.findByLogin(data.login()) !=null) return ResponseEntity.badRequest().build();
 		
 		String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-		Usuario newUsuario = new Usuario(data.email(), encryptedPassword, data.role());
+		User newUsuario = new User(data.login(), encryptedPassword, data.role());
 		
 		this.DAO.save(newUsuario);
 		

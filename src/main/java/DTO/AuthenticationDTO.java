@@ -1,5 +1,5 @@
 package DTO;
 
-public record AuthenticationDTO(String email, String password) {
+public record AuthenticationDTO(String login, String password) {
 
 }

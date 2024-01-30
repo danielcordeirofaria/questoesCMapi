@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.questoesCM.model.Questao;
-import com.questoesCM.model.Usuario;
 import com.questoesCM.service.IQuestaoService;
 
 @RestController

@@ -18,8 +18,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tbl_usuarios")
-public class Usuario implements UserDetails{
+@Table(name = "tbl_users")
+public class User implements UserDetails{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -31,6 +31,9 @@ public class Usuario implements UserDetails{
 	
 	@Column(name = "email", length = 40, nullable = false)
 	private String email;
+	
+	@Column(name = "login", length = 40, nullable = false)
+	private String login;
 	
 	@Column(name = "password", length = 40, nullable = false)
 	private String password; 
@@ -57,7 +60,7 @@ public class Usuario implements UserDetails{
     private UserRole role;
 
 
-	public Usuario(int idUsuario, String nome, String email, String password, Date dataNascimento, String cidade, String whatsapp,
+	public User(int idUsuario, String nome, String email, String login, String password, Date dataNascimento, String cidade, String whatsapp,
 			Date dataCompra, ColegioEnum escolaDaProva, UserRole role) {
 		super();
 		this.idUsuario = idUsuario;
@@ -72,13 +75,13 @@ public class Usuario implements UserDetails{
 		this.role = role;
 	}
 	
-	public Usuario(String email, String password, UserRole role) {
-		this.email = email;
+	public User(String login, String password, UserRole role) {
+		this.login = login;
 		this.password = password;
 		
 	}
 
-	public Usuario() {
+	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -99,6 +102,19 @@ public class Usuario implements UserDetails{
 		this.nome = nome;
 	}
 	
+	
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+
 	public void setPassword(String senha) {
 		this.password = senha;
 	}
@@ -176,7 +192,7 @@ public class Usuario implements UserDetails{
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return email;
+		return login;
 	}
 
 	@Override

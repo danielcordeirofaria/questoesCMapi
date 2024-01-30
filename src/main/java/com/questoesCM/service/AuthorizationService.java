@@ -7,18 +7,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.questoesCM.DAO.UsuarioDAO;
+import com.questoesCM.DAO.UserDAO;
 
 @Service
 public class AuthorizationService implements UserDetailsService{
 	
 	@Autowired
-	UsuarioDAO DAO;
+	UserDAO DAO;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		return DAO.findByEmail(username);
+		return DAO.findByLogin(username);
 	}
 
 

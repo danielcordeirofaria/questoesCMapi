@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.springframework.http.ResponseEntity;
 
 import com.questoesCM.model.Questao;
-import com.questoesCM.model.Usuario;
+import com.questoesCM.model.User;
 
 public interface IQuestaoService {
 
