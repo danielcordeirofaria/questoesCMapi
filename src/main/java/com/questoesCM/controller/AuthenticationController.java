@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.questaoCM.security.TokenService;
 import com.questoesCM.DAO.UserDAO;
+import com.questoesCM.DTO.AuthenticationDTO;
 import com.questoesCM.DTO.LoginResponseDTO;
 import com.questoesCM.DTO.RegisterDTO;
 import com.questoesCM.model.User;
-
-import DTO.AuthenticationDTO;
-import security.TokenService;
 
 @RestController
 @RequestMapping("auth")
