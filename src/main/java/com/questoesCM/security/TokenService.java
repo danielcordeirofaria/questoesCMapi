@@ -1,4 +1,4 @@
-package com.questaoCM.security;
+package com.questoesCM.security;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
