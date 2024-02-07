@@ -41,6 +41,7 @@ public class SecurityConfigurations {
                 .requestMatchers(HttpMethod.POST, "/questoes").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
+            
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
     }
