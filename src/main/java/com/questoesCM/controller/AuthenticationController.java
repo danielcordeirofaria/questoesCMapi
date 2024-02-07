@@ -6,6 +6,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,18 +39,20 @@ public class AuthenticationController {
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
 
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        return ResponseEntity.ok(new LoginResponseDTO(token)); 
     }
+    
+    
 	
-	@PostMapping("/register")
-	public ResponseEntity register(@RequestBody @Validated RegisterDTO data) {
-		if(this.DAO.findByLogin(data.login()) !=null) return ResponseEntity.badRequest().build();
-		
-		String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-		User newUsuario = new User(data.login(), encryptedPassword, data.role());
-		
-		this.DAO.save(newUsuario);
-		
-		return ResponseEntity.ok().build();
-	}
-}
+//	@PostMapping("/register")
+//	public ResponseEntity register(@RequestBody @Validated RegisterDTO data) {
+//		if(this.DAO.findByLogin(data.login()) !=null) return ResponseEntity.badRequest().build();
+//		
+//		String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
+//		User newUsuario = new User(data.login(), encryptedPassword, data.role());
+//		
+//		this.DAO.save(newUsuario);
+//		
+//		return ResponseEntity.ok().build();
+//	}
+} 

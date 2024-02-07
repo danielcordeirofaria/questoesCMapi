@@ -1,8 +1,9 @@
-CREATE TABLE tbl_usuarios (
+CREATE TABLE tbl_users (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     nome_usuario VARCHAR(255) NOT NULL,
     email VARCHAR(40) NOT NULL,
-    senha VARCHAR(40) NOT NULL,
+    login VARCHAR(40) NOT NULL UNIQUE,
+    password TEXT NOT NULL, -- Adicionei o tipo de dado (assumindo que seja uma string hash)
     data_nascimento DATE NOT NULL,
     cidade VARCHAR(50) NOT NULL,
     whatsapp VARCHAR(13) NOT NULL,
