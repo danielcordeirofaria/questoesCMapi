@@ -4,11 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.questoesCM.model.Questao;
 import com.questoesCM.service.IQuestaoService;
@@ -18,34 +14,32 @@ public class QuestaoController {
 
 	@Autowired
 	private IQuestaoService service;
-	
+
     @PostMapping("/questoes")
     public ResponseEntity<String> salvarQuestao(@RequestBody Questao q) {
-        try {
-            System.out.println("Id_questao antes de salvar: " + q.getIdQuestao());
-
-            service.salvarQuestao(q);
-            
-            System.out.println("Id_questao após salvar: " + q.getIdQuestao());
-
-            return ResponseEntity.ok("Questao adicionada com sucesso!");
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Erro ao adicionar a questao: " + e.getMessage());
+        String respostaServico = service.salvarQuestao(q);
+        if (respostaServico.startsWith("Erro")) {
+            // Se a resposta do serviço começar com "Erro", significa que ocorreu um erro
+            return ResponseEntity.status(500).body(respostaServico);
+        } else {
+            // Caso contrário, a operação foi bem-sucedida
+            return ResponseEntity.ok(respostaServico);
         }
     }
+
     
     @GetMapping("/questoes")
     public ResponseEntity<ArrayList<Questao>> recuperarQuestoes(){
     	ArrayList<Questao> questoes = (ArrayList<Questao>)service.recuperarQuestoes();
     	return ResponseEntity.ok(questoes);
     }
-    
-//    @GetMapping("/questao/{anoProva}")
-//    public ResponseEntity<ArrayList<Questao>> simuladoPorAno(@PathVariable int anoProva){
-//    	ArrayList<Questao> simulado = (ArrayList<Questao>)service.simuladoPorAno(anoProva);
-//    	return ResponseEntity.ok(simulado);
-//    }
-//    
-   
 
+    @PutMapping("/questoes/{id}")
+    public ResponseEntity<Questao> atualizarQuestao(@PathVariable("id") int id, @RequestBody Questao q) {
+        Questao res = service.atualizarQuestao(id, q);
+        if (res != null){
+            return ResponseEntity.ok(res);
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

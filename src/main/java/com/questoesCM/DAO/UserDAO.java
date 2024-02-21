@@ -15,10 +15,8 @@ public interface UserDAO extends JpaRepository<User, Long> {
 
 	ArrayList<User> findByCidade(String cidade);
 	
-	UserDetails findByLogin(String username);
-
-//	User findById(int idUsuario);
-
+    User findByLogin(String username);
+    
 	User findByIdUsuario(int idUsuario);
 
 

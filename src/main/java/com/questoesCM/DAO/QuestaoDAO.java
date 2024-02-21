@@ -9,6 +9,7 @@ import com.questoesCM.model.Questao;
 
 public interface QuestaoDAO extends CrudRepository<Questao, Integer> {
 	
-    ArrayList<Questao> findByAnoProva(int anoProva);
-	
+    ArrayList<Questao> findByAnoProva(String anoProva);
+
+    boolean existsByCodigoQuestao(String codigoQuestao);
 }

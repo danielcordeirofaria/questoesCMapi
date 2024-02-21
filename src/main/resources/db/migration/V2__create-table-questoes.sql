@@ -1,6 +1,8 @@
+
 CREATE TABLE tbl_questoes (
     id_questao INT PRIMARY KEY AUTO_INCREMENT,
-    ano_prova INT NOT NULL,
+    codigo_questao VARCHAR(20) NOT NULL,
+    ano_prova VARCHAR(255) NOT NULL,
     numero_questao INT NOT NULL,
     enunciado TEXT NOT NULL,
     resposta_a TEXT NOT NULL,

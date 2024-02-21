@@ -15,7 +15,5 @@ public interface IQuestaoService {
 
 	String salvarQuestao(Questao q);
 
-	public void save(Questao q);
-
-	
+    Questao atualizarQuestao(int id, Questao q);
 }

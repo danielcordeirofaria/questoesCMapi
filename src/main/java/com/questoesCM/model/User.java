@@ -39,7 +39,7 @@ public class User implements UserDetails{
 	private String password; 
 	
 	@Column(name = "data_nascimento", nullable = false)
-	private Date dataNascimento;
+	private String dataNascimento;
 	
 	@Column(name = "cidade", length = 50, nullable = false)
 	private String cidade;
@@ -60,7 +60,7 @@ public class User implements UserDetails{
     private UserRole role;
 
 
-	public User(int idUsuario, String nome, String email, String login, String password, Date dataNascimento, String cidade, String whatsapp,
+	public User(int idUsuario, String nome, String email, String login, String password, String dataNascimento, String cidade, String whatsapp,
 			Date dataCompra, ColegioEnum escolaDaProva, UserRole role) {
 		super();
 		this.idUsuario = idUsuario;
@@ -119,11 +119,11 @@ public class User implements UserDetails{
 		this.password = senha;
 	}
 
-	public Date getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

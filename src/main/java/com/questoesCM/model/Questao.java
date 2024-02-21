@@ -15,49 +15,60 @@ public class Questao {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id_questao")
+	@Column(name = "id_questao" )
 	private int idQuestao;
-	
+
+	@Column(name = "codigo_questao")
+	private String codigoQuestao;
+
+	@Column(name = "escola_da_prova", length = 10)
+	@Enumerated(EnumType.STRING)
+//	opções de escolas ('CMC', 'CMRJ', 'CMSP', 'CMBel', 'CMBH', 'CMB', 'CMCG', 'CMF', 'CMJF', 'CMM', 'CMPA', 'CMR', 'CMS', 'CMSM')
+	private ColegioEnum escolaDaProva;
+
 	@Column(name = "ano_prova", nullable = false)
-	private int anoProva;
+	private String anoProva;
 
 	@Column(name = "numero_questao", nullable = false)
 	private int numeroQuestao;
-	
+
 	@Column(name = "enunciado", nullable = false)
 	private String enunciado;
 
 	@Column(name = "resposta_a", nullable = false)
 	private String respostaA;
-	
+
 	@Column(name = "resposta_b", nullable = false)
 	private String respostaB;
-	
+
 	@Column(name = "resposta_c", nullable = false)
 	private String respostaC;
-	
+
 	@Column(name = "resposta_d", nullable = false)
 	private String respostaD;
-	
+
 	@Column(name = "resposta_e", nullable = false)
 	private String respostaE;
-	
+
 	@Column(name = "gabarito", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private GabaritoEnum gabarito;
-	
+
 	@Column(name = "materia", nullable = false)
 	@Enumerated(EnumType.STRING)
 //	opções: MATEMATICA ou PORTUGUES
 	private MateriaEnum materia;
-	
+
 	@Column(name = "endereco_video")
 	private String enderecoVideo;
-		
-	public Questao(int anoProva, int numeroQuestao, String enunciado,
+
+	public Questao( String codigoQuestao, ColegioEnum escolaDaProva, String anoProva, int numeroQuestao, String enunciado,
 			String respostaA, String respostaB, String respostaC, String respostaD, String respostaE,
 			GabaritoEnum gabarito, MateriaEnum materia, String enderecoVideo) {
 		super();
+
+		this.codigoQuestao = codigoQuestao;
+		this.escolaDaProva = escolaDaProva;
 		this.anoProva = anoProva;
 		this.numeroQuestao = numeroQuestao;
 		this.enunciado = enunciado;
@@ -71,25 +82,43 @@ public class Questao {
 		this.enderecoVideo = enderecoVideo;
 	}
 
-	
+
 	public Questao() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getCodigoQuestao() {
+		return codigoQuestao;
+	}
+
+	public void setCodigoQuestao(String codigoQuestao) {
+		this.codigoQuestao = codigoQuestao;
 	}
 
 	public int getIdQuestao() {
 		return idQuestao;
 	}
 
-//	public void setIdQuestao(int idQuestao) {
-//		this.idQuestao = idQuestao;
-//	}
+	public void setIdQuestao(int idQuestao) {
+		this.idQuestao = idQuestao;
+	}
 
-	public int getAnoProva() {
+	public ColegioEnum getEscolaDaProva() {
+		return escolaDaProva;
+	}
+
+
+	public void setEscolaDaProva(ColegioEnum escolaDaProva) {
+		this.escolaDaProva = escolaDaProva;
+	}
+
+
+	public String getAnoProva() {
 		return anoProva;
 	}
 
-	public void setAnoProva(int anoProva) {
+	public void setAnoProva(String anoProva) {
 		this.anoProva = anoProva;
 	}
 

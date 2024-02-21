@@ -21,17 +21,16 @@ public class UserController {
 	private IUsuarioService service;
 	
     @PostMapping("/usuarios")
-    public ResponseEntity<String> cadastrarUsuario(@RequestBody User user) {
+    public ResponseEntity<?> cadastrarUsuario(@RequestBody User user) {
         try {
             service.cadastrarUsuario(user);
-            return ResponseEntity.ok("Usuario adicionado com sucesso!");
+            System.out.println("Usuario cadastrado: " + user.getNome() + "!!!!!!!!!!!!!!!!!!!!");
+            return ResponseEntity.ok(user);
         } catch (Exception e) {
             // Aqui você pode lidar com a exceção de maneira apropriada, como logá-la ou retornar uma mensagem de erro específica.
             return ResponseEntity.status(500).body("Erro ao cadastrar o usuario: " + e.getMessage());
         }
-    }
-    
-    
+    }    
 
     @GetMapping("/usuarios")
     public ResponseEntity<ArrayList<User>> recuperarTodos() {
